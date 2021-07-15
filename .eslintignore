@@ -1,0 +1,3 @@
+/.build-cache/
+**/_vendor/**/*
+/tests/
