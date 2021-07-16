@@ -16,7 +16,7 @@ const readPrerenderMarks = (...selections: AlternativeSelections[]): Partial<Pre
   const exacts = selections?.length ? selections : targeting;
   const result = {} as Partial<PrerenderMonitorResult>;
   exacts.forEach(item => {
-    result[item] = alias[item]
+    result[item] = alias[item]()
   });
   return result;
 }

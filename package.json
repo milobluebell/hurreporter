@@ -2,10 +2,59 @@
   "name": "hurreporter-forked",
   "version": "0.0.1",
   "description": "performance-monitor",
-  "main": "index.js",
   "scripts": {
-    "build": "echo \"Error: no test specified\" && exit 1",
-    "lint": ""
+    "dist:dev": "npx cross-env rollup -c rollup.config.dev.js",
+    "dist": "npx cross-env rollup -c rollup.config.js && npm run bundlesize",
+    "lint": "npx cross-env eslint",
+    "bundlesize": "bundlesize"
+  },
+  "bin": {
+    "hur": "./lib/bin/server-monitor.js",
+    "hur:fe": "./lib/bin/browser-monitor.js",
+    "hur:limit": "./lib/bin/browser-monitor.js",
+    "hur:fe:limit": "./lib/bin/browser-monitor.js",
+    "hur:upload": "./lib/bin/upload-result.js"
+  },
+  "main": "dist/bundle.min.js",
+  "files": [
+    "dist",
+    "lib",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "dependencies": {
+    "@babel/plugin-proposal-decorators": "^7.14.5",
+    "as-table": "^1.0.55",
+    "chalk": "^4.1.1",
+    "fetch": "^1.1.0",
+    "fsevents": "^2.3.2",
+    "lodash-es": "^4.17.21",
+    "mkdirp": "^1.0.4",
+    "ora": "^5.4.1",
+    "yargs": "^16.2.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
+    "@types/node": "^16.3.2",
+    "@types/yargs": "^17.0.2",
+    "babel": "^6.23.0",
+    "bundlesize": "^0.18.1",
+    "core-js": "^3.15.2",
+    "cross-env": "^7.0.3",
+    "eslint": "^7.30.0",
+    "husky": "^7.0.1",
+    "prettier": "^2.3.2",
+    "rollup": "^2.53.2",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-sourcemaps": "^0.6.3",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.30.0",
+    "standard-version": "^9.3.1",
+    "typescript": "^4.3.5"
   },
   "repository": {
     "type": "git",
@@ -17,17 +66,10 @@
     "url": "https://github.com/milobluebell/hurreporter/issues"
   },
   "homepage": "https://github.com/milobluebell/hurreporter#readme",
-  "dependencies": {
-    "@babel/plugin-proposal-decorators": "^7.14.5",
-    "fsevents": "^2.3.2",
-    "lodash-es": "^4.17.21"
-  },
-  "devDependencies": {
-    "babel": "^6.23.0",
-    "core-js": "^3.15.2",
-    "eslint": "^7.30.0",
-    "prettier": "^2.3.2",
-    "rollup": "^2.53.2",
-    "typescript": "^4.3.5"
-  }
+  "bundlesize": [
+    {
+      "path": "./dist/bundle.min.js",
+      "maxSize": "10 kB"
+    }
+  ]
 }
