@@ -9,27 +9,15 @@ const targeting = ['fp', 'fmp', 'fcp', 'domContentLoad', 'onLoad', 'tti', 'tbt']
 // 所以后面两个函数应该进行合并，从代码层减少体积。
 export const readFP = checkWindow((PO) => {
   let fp = 0;
-  const fpOberserver = new PO(list => {
-    for (const entry of list.getEntriesByName('first-paint')) {
+  const fpObserver = new PO(list => {
+    for (const entry of list.getEntriesByType('paint')) {
       // Log the value of FCP to the console.
+      console.log(entry, 12);
       fp = entry.startTime;
-      fpOberserver.disconnect();
+      fpObserver.disconnect();
     }
   });
   return fp;
-});
-
-// TODO: FCPvsFP取信的问题，其实意思真差不太多。
-export const readFCP = checkWindow((PO) => {
-  let fcp = 0;
-  const fpOberserver = new PO(entries => {
-    for (const entry of entries.getEntriesByName('first-contentful-paint')) {
-      // Log the value of FCP to the console.
-      fcp = entry.startTime;
-      fpOberserver.disconnect();
-    }
-  });
-  return fcp;
 });
 
 const alias = {
@@ -40,7 +28,7 @@ const readNormalMarks = (...selections: AlternativeSelections[]): Partial<Normal
   const exacts = selections?.length ? selections : targeting;
   const result = {} as Partial<NormalMarksMonitorResult>;
   exacts.forEach(item => {
-    result[item] = alias[item]
+    result[item] = alias[item]()
   });
   return result;
 }

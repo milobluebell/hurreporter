@@ -5,7 +5,7 @@ import { checkWindow, ElementOf } from '../../utils';
 const targeting = ['dns', 'connection', 'request'] as const;
 
 export const readDNSLookup = checkWindow((PO) => {
-
+  return 112233
 });
 
 const alias = {

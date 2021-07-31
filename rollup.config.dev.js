@@ -6,7 +6,7 @@ const pkg = require('./package.json');
 export default {
   input: `src/index.ts`,
   output: [
-    { file: 'dist/bundle.umd.js', name: 'index', format: 'umd', sourcemap: false }
+    { file: 'dist/bundle.js', name: 'index', format: 'iife', sourcemap: false }
   ],
   plugins: [
     typescript({ useTsconfigDeclarationDir: true }),
